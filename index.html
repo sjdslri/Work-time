@@ -57,6 +57,11 @@ dialog{border-radius:24px;padding:20px;width:min(92vw,460px);color:var(--ink);ba
 dialog::backdrop{background:rgba(0,0,0,.65);backdrop-filter:blur(4px)}
 dialog img{width:100%;max-height:60dvh;object-fit:contain;border-radius:14px;margin-bottom:12px}
 .dp{font-size:14px;margin:8px 0}ol.dp{padding-right:20px}.dp a{color:var(--ac);font-weight:600}#syn.on{color:var(--ac)}
+.dpb{width:100%;min-height:44px;padding:10px 12px;border-radius:14px;border:1px solid var(--ln);background:var(--sf2);text-align:right;font-size:16px;color:var(--ink)}
+.cn{display:flex;align-items:center;gap:2px;margin-bottom:8px}.cn strong{flex:1;text-align:center}.cn button{width:36px;height:36px;border-radius:50%;font-size:18px;background:var(--sf2)}
+.cg{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}.cg small{color:var(--mu);font-size:12px}.cg small:nth-child(7){color:var(--dg)}
+.cg button{aspect-ratio:1;min-height:38px;border-radius:50%;font-size:15px}.cg button.t{border:2px solid var(--ac)}.cg button.f{color:var(--dg)}
+.cg button[aria-pressed=true]{background:var(--ac);color:var(--ai);font-weight:800}
 .h2{font-weight:800;font-size:18px;margin-bottom:8px}.sw{display:flex;align-items:center;gap:8px;font-size:14px;margin:8px 0}.sw input{width:22px;min-height:0;height:22px}
 @media(max-width:480px){.g2{gap:8px}.amt{font-size:15px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -67,7 +72,7 @@ dialog img{width:100%;max-height:60dvh;object-fit:contain;border-radius:14px;mar
  <div class="top">
   <div class="logo">&#x6A9;&#x627;&#x631;<i>&#x646;&#x627;&#x645;&#x647;</i></div>
   <button class="ib2" id="syn" aria-label="&#x647;&#x645;&#x6AF;&#x627;&#x645;&#x200C;&#x633;&#x627;&#x632;&#x6CC;">&#x2601;</button><button class="ib2" id="set" aria-label="&#x62A;&#x646;&#x638;&#x6CC;&#x645;&#x627;&#x62A;">&#x2699;</button><button class="ib2" id="theme" aria-label="&#x62A;&#x63A;&#x6CC;&#x6CC;&#x631; &#x62A;&#x645;">&#x1F313;</button>
-  <div class="mon"><button id="nx" aria-label="&#x645;&#x627;&#x647; &#x628;&#x639;&#x62F;">&#x203A;</button><strong id="ml"></strong><button id="pv" aria-label="&#x645;&#x627;&#x647; &#x642;&#x628;&#x644;">&#x2039;</button><button class="all" id="all">&#x647;&#x645;&#x647; &#x645;&#x627;&#x647;&#x200C;&#x647;&#x627;</button></div>
+  <div class="mon"><button id="nx" aria-label="&#x645;&#x627;&#x647; &#x642;&#x628;&#x644;">&#x203A;</button><strong id="ml"></strong><button id="pv" aria-label="&#x645;&#x627;&#x647; &#x628;&#x639;&#x62F;">&#x2039;</button><button class="all" id="all">&#x647;&#x645;&#x647; &#x645;&#x627;&#x647;&#x200C;&#x647;&#x627;</button></div>
  </div>
  <main id="v"></main>
 </div>
@@ -105,6 +110,8 @@ dialog img{width:100%;max-height:60dvh;object-fit:contain;border-radius:14px;mar
  <p class="dp" id="sst" style="color:var(--ac);font-weight:600"></p>
  <p class="dp" style="font-size:12px;color:var(--mu)">&#x62A;&#x648;&#x6A9;&#x646; &#x631;&#x627; &#x628;&#x647; &#x6A9;&#x633;&#x6CC; &#x646;&#x62F;&#x647;. &#x641;&#x642;&#x637; &#x631;&#x648;&#x6CC; &#x647;&#x645;&#x6CC;&#x646; &#x645;&#x631;&#x648;&#x631;&#x6AF;&#x631; &#x630;&#x62E;&#x6CC;&#x631;&#x647; &#x645;&#x6CC;&#x200C;&#x634;&#x648;&#x62F; &#x648; &#x641;&#x642;&#x637; &#x628;&#x647; Gist &#x62F;&#x633;&#x62A;&#x631;&#x633;&#x6CC; &#x62F;&#x627;&#x631;&#x62F;. Gist &#x62E;&#x635;&#x648;&#x635;&#x6CC; &#x627;&#x633;&#x62A; &#x648;&#x644;&#x6CC; &#x647;&#x631; &#x6A9;&#x633; &#x644;&#x6CC;&#x646;&#x6A9;&#x634; &#x631;&#x627; &#x62F;&#x627;&#x634;&#x62A;&#x647; &#x628;&#x627;&#x634;&#x62F; &#x645;&#x6CC;&#x200C;&#x62A;&#x648;&#x627;&#x646;&#x62F; &#x628;&#x628;&#x6CC;&#x646;&#x62F;.</p>
 </dialog>
+<dialog id="dCal"><div class="cn"><button type="button" id="cy1" aria-label="&#x633;&#x627;&#x644; &#x642;&#x628;&#x644;">&raquo;</button><button type="button" id="cm1" aria-label="&#x645;&#x627;&#x647; &#x642;&#x628;&#x644;">&rsaquo;</button><strong id="ct"></strong><button type="button" id="cm0" aria-label="&#x645;&#x627;&#x647; &#x628;&#x639;&#x62F;">&lsaquo;</button><button type="button" id="cy0" aria-label="&#x633;&#x627;&#x644; &#x628;&#x639;&#x62F;">&laquo;</button></div>
+<div class="cg" id="cgr"></div><div class="dr" style="margin-top:12px"><button class="go" id="ctd">&#x627;&#x645;&#x631;&#x648;&#x632;</button><button class="bt" id="ccx">&#x628;&#x633;&#x62A;&#x646;</button></div></dialog>
 <dialog id="dImg"><img id="big" alt="&#x641;&#x6CC;&#x634;"><div class="dr"><a class="go" id="dl" style="text-decoration:none;display:grid;place-items:center">&#x62F;&#x627;&#x646;&#x644;&#x648;&#x62F; &#x639;&#x6A9;&#x633;</a><button class="bt" id="icl">&#x628;&#x633;&#x62A;&#x646;</button></div></dialog>
 
 <script>
@@ -157,9 +164,10 @@ function render(){
   $('#all').setAttribute('aria-pressed',cur===null);$('#nx').disabled=$('#pv').disabled=cur===null;
   document.querySelectorAll('#nav button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.t===tab));
   ({sh:vSh,pay:vPay,exp:vExp,rep:vRep})[tab]();
+  document.querySelectorAll('[data-dp]').forEach(b=>b.onclick=()=>openCal(b));
 }
 document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>{tab=b.dataset.t;E=null;render();scrollTo(0,0)});
-$('#nx').onclick=()=>{cur++;render()};$('#pv').onclick=()=>{cur--;render()};
+$('#nx').onclick=()=>{cur--;render()};$('#pv').onclick=()=>{cur++;render()};
 $('#all').onclick=()=>{cur=cur===null?mk(TODAY):null;render()};
 const R=document.documentElement;R.dataset.theme=ST.g('kn_theme','dark');
 $('#theme').onclick=()=>{const t=R.dataset.theme==='dark'?'light':'dark';R.dataset.theme=t;ST.s('kn_theme',t)};
@@ -180,7 +188,7 @@ function vSh(){
   const L=D.sh.filter(s=>inS(s.date)).sort((a,b)=>b.date.localeCompare(a.date)||a.start.localeCompare(b.start));
   const days={};L.forEach(s=>(days[s.date]=days[s.date]||[]).push(s));
   const a=agg(cur);
-  let h=`<form class="card f" id="f"><div class="g2"><label>\u062a\u0627\u0631\u06cc\u062e<input type="date" name="date" required value="${v.date}"></label>
+  let h=`<form class="card f" id="f"><div class="g2"><label>\u062a\u0627\u0631\u06cc\u062e${dp(v.date)}</label>
   <label>\u0646\u0648\u0639<select name="type"><option value="w" ${v.type==='w'?'selected':''}>\u0627\u062f\u0627\u0631\u0647 / \u06a9\u0627\u0631 \u0639\u0627\u062f\u06cc</option><option value="m" ${v.type==='m'?'selected':''}>\u0645\u0627\u0645\u0648\u0631\u06cc\u062a</option></select></label></div>
   <div class="g2"><label>\u0634\u0631\u0648\u0639<input type="time" name="start" required value="${v.start}"></label><label>\u067e\u0627\u06cc\u0627\u0646<input type="time" name="end" required value="${v.end}"></label></div>
   <label>\u0639\u0646\u0648\u0627\u0646 (\u0627\u062e\u062a\u06cc\u0627\u0631\u06cc)<input name="title" maxlength="60" placeholder="\u0645\u062b\u0644\u0627\u064b: \u0627\u062f\u0627\u0631\u0647\u060c \u0646\u0645\u0627\u06cc\u0634\u06af\u0627\u0647" value="${esc(v.title)}"></label>
@@ -205,7 +213,7 @@ function vSh(){
 function vPay(){
   const e=getE('pay'),v=e||{date:TODAY,amount:'',note:''};
   const L=D.pay.filter(p=>inS(p.date)).sort((a,b)=>b.date.localeCompare(a.date)),tot=L.reduce((x,p)=>x+p.amount,0);
-  $('#v').innerHTML=`<form class="card f" id="f"><div class="g2"><label>\u062a\u0627\u0631\u06cc\u062e \u0648\u0627\u0631\u06cc\u0632<input type="date" name="date" required value="${v.date}"></label>
+  $('#v').innerHTML=`<form class="card f" id="f"><div class="g2"><label>\u062a\u0627\u0631\u06cc\u062e \u0648\u0627\u0631\u06cc\u0632${dp(v.date)}</label>
   <label>\u0645\u0628\u0644\u063a (${esc(D.cfg.cur)})<input name="amount" inputmode="numeric" dir="ltr" required placeholder="0" value="${v.amount?v.amount.toLocaleString('en-US'):''}"></label></div>
   <label>\u062a\u0648\u0636\u06cc\u062d (\u0627\u062e\u062a\u06cc\u0627\u0631\u06cc)<input name="note" maxlength="80" placeholder="\u0645\u062b\u0644\u0627\u064b: \u062d\u0642\u0648\u0642\u060c \u067e\u0627\u062f\u0627\u0634" value="${esc(v.note)}"></label>
   <div class="dr"><button class="go">${e?'\u0630\u062e\u06cc\u0631\u0647 \u062a\u063a\u06cc\u06cc\u0631':'\u062b\u0628\u062a \u0648\u0627\u0631\u06cc\u0632\u06cc'}</button>${cancelBtn()}</div></form>
@@ -222,7 +230,7 @@ function moneyInput(i){i.oninput=()=>{const n=num(i.value);i.value=n?n.toLocaleS
 function vExp(){
   const e=getE('exp'),v=e||{date:TODAY,amount:'',title:''};
   const L=D.exp.filter(p=>inS(p.date)).sort((a,b)=>b.date.localeCompare(a.date)),tot=L.reduce((x,p)=>x+p.amount,0);
-  $('#v').innerHTML=`<form class="card f" id="f"><div class="g2"><label>\u062a\u0627\u0631\u06cc\u062e \u062e\u0631\u06cc\u062f<input type="date" name="date" required value="${v.date}"></label>
+  $('#v').innerHTML=`<form class="card f" id="f"><div class="g2"><label>\u062a\u0627\u0631\u06cc\u062e \u062e\u0631\u06cc\u062f${dp(v.date)}</label>
   <label>\u0645\u0628\u0644\u063a (${esc(D.cfg.cur)})<input name="amount" inputmode="numeric" dir="ltr" required placeholder="0" value="${v.amount?v.amount.toLocaleString('en-US'):''}"></label></div>
   <label>\u0686\u06cc \u062e\u0631\u06cc\u062f\u06cc\u061f<input name="title" maxlength="80" required placeholder="\u0645\u062b\u0644\u0627\u064b: \u0628\u0646\u0632\u06cc\u0646\u060c \u063a\u0630\u0627\u060c \u0627\u0628\u0632\u0627\u0631" value="${esc(v.title)}"></label>
   <label>\u0639\u06a9\u0633 \u0641\u06cc\u0634 ${e&&e.img?'(\u0628\u0631\u0627\u06cc \u062a\u063a\u06cc\u06cc\u0631\u060c \u0639\u06a9\u0633 \u062c\u062f\u06cc\u062f \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0646)':'(\u0627\u062e\u062a\u06cc\u0627\u0631\u06cc)'}<input type="file" name="img" accept="image/*"></label>
@@ -281,6 +289,29 @@ function pdf(key){
   const d=f.contentWindow.document;d.open();d.write(html);d.close();
   setTimeout(()=>{f.contentWindow.focus();f.contentWindow.print()},700);
 }
+
+
+// ---- Persian date picker ----
+const fdl=d=>fd(d)+' '+pn(J(d).y);
+const dp=d=>`<input type="hidden" name="date" value="${d}"><button type="button" class="dpb" data-dp>${fdl(d)}</button>`;
+const shift=(d,n)=>{const x=new Date(d+'T12:00');x.setDate(x.getDate()+n);return iso(x)};
+function jFirst(y,m){const b=iso(new Date(y+621,2,21,12));const d0=shift(b,Math.round((m-1)*30.5));
+  for(let k=-45;k<=45;k++){const g=shift(d0,k),j=J(g);if(j.y===y&&j.m===m&&j.d===1)return g}return d0}
+let cy,cm,ctg;
+function openCal(btn){ctg=btn;const j=J(btn.previousElementSibling.value||TODAY);cy=j.y;cm=j.m;drawCal();$('#dCal').showModal()}
+function drawCal(){
+  const f=jFirst(cy,cm);let n=0;while(J(shift(f,n)).m===cm&&n<32)n++;
+  const sel=ctg.previousElementSibling.value,off=(new Date(f+'T12:00').getDay()+1)%7;
+  let h=['\u0634','\u06cc','\u062f','\u0633','\u0686','\u067e','\u062c'].map(x=>`<small>${x}</small>`).join('')+'<span></span>'.repeat(off);
+  for(let i=0;i<n;i++){const g=shift(f,i);h+=`<button type="button" data-g="${g}" aria-pressed="${g===sel}" class="${g===TODAY?'t':''} ${(off+i)%7===6?'f':''}">${pn(i+1)}</button>`}
+  $('#ct').textContent=MN[cm-1]+' '+pn(cy);$('#cgr').innerHTML=h;
+  document.querySelectorAll('#cgr [data-g]').forEach(b=>b.onclick=()=>pick(b.dataset.g));
+}
+function pick(g){const h=ctg.previousElementSibling;h.value=g;ctg.textContent=fdl(g);$('#dCal').close();h.form.dispatchEvent(new Event('input',{bubbles:true}))}
+const stepM=n=>{cm+=n;while(cm>12){cm-=12;cy++}while(cm<1){cm+=12;cy--}drawCal()};
+$('#cm1').onclick=()=>stepM(-1);$('#cm0').onclick=()=>stepM(1);
+$('#cy1').onclick=()=>{cy--;drawCal()};$('#cy0').onclick=()=>{cy++;drawCal()};
+$('#ctd').onclick=()=>pick(TODAY);$('#ccx').onclick=()=>$('#dCal').close();
 
 // settings + backup
 $('#set').onclick=()=>{$('#cbs').value=D.cfg.bs;$('#cbe').value=D.cfg.be;$('#cfr').checked=D.cfg.fri;$('#ccu').value=D.cfg.cur;$('#dSet').showModal()};
