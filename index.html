@@ -89,8 +89,8 @@ details.acc summary b{margin-right:auto;color:var(--ac);font-size:15px}details.a
 
 <dialog id="dSet">
  <div class="h2">&#x62A;&#x646;&#x638;&#x6CC;&#x645;&#x627;&#x62A;</div>
- <p style="font-size:14px;color:var(--mu)">&#x628;&#x627;&#x632;&#x647; &#x6A9;&#x627;&#x631; &#x639;&#x627;&#x62F;&#x6CC;: &#x633;&#x627;&#x639;&#x62A;&#x200C;&#x647;&#x627;&#x6CC; &#x62F;&#x627;&#x62E;&#x644; &#x627;&#x6CC;&#x646; &#x628;&#x627;&#x632;&#x647; &#x639;&#x627;&#x62F;&#x6CC; &#x62D;&#x633;&#x627;&#x628; &#x645;&#x6CC;&#x200C;&#x634;&#x648;&#x62F; &#x648; &#x647;&#x631; &#x686;&#x647; &#x628;&#x6CC;&#x631;&#x648;&#x646; &#x627;&#x632; &#x622;&#x646; &#x628;&#x627;&#x634;&#x62F;&#x60C; &#x62E;&#x648;&#x62F;&#x6A9;&#x627;&#x631; &#x627;&#x636;&#x627;&#x641;&#x647;&#x200C;&#x6A9;&#x627;&#x631; &#x627;&#x633;&#x62A;.</p>
- <div class="g2" style="margin-top:8px"><label>&#x634;&#x631;&#x648;&#x639; &#x6A9;&#x627;&#x631; &#x639;&#x627;&#x62F;&#x6CC;<input type="time" id="cbs"></label><label>&#x67E;&#x627;&#x6CC;&#x627;&#x646; &#x6A9;&#x627;&#x631; &#x639;&#x627;&#x62F;&#x6CC;<input type="time" id="cbe"></label></div>
+ <p style="font-size:14px;color:var(--mu)">&#x633;&#x627;&#x639;&#x62A; &#x627;&#x62F;&#x627;&#x631;&#x6CC;: &#x647;&#x631; &#x632;&#x645;&#x627;&#x646;&#x6CC; &#x6A9;&#x647; &#x628;&#x6CC;&#x631;&#x648;&#x646; &#x627;&#x632; &#x627;&#x6CC;&#x646; &#x628;&#x627;&#x632;&#x647; &#x6A9;&#x627;&#x631; &#x6A9;&#x646;&#x6CC;&#x60C; &#x62E;&#x648;&#x62F;&#x6A9;&#x627;&#x631; &#x627;&#x636;&#x627;&#x641;&#x647;&#x200C;&#x6A9;&#x627;&#x631; &#x62D;&#x633;&#x627;&#x628; &#x645;&#x6CC;&#x200C;&#x634;&#x648;&#x62F;.</p>
+ <div class="g2" style="margin-top:8px"><label>&#x634;&#x631;&#x648;&#x639; &#x633;&#x627;&#x639;&#x62A; &#x627;&#x62F;&#x627;&#x631;&#x6CC;<input type="time" id="cbs"></label><label>&#x67E;&#x627;&#x6CC;&#x627;&#x646; &#x633;&#x627;&#x639;&#x62A; &#x627;&#x62F;&#x627;&#x631;&#x6CC;<input type="time" id="cbe"></label></div>
  <label class="sw"><input type="checkbox" id="cfr">&#x62C;&#x645;&#x639;&#x647;&#x200C;&#x647;&#x627; &#x647;&#x645;&#x647; &#x633;&#x627;&#x639;&#x62A;&#x200C;&#x647;&#x627; &#x627;&#x636;&#x627;&#x641;&#x647;&#x200C;&#x6A9;&#x627;&#x631; &#x628;&#x627;&#x634;&#x62F;</label>
  <label>&#x648;&#x627;&#x62D;&#x62F; &#x67E;&#x648;&#x644;<input id="ccu" maxlength="12"></label>
  <div class="dr" style="margin-top:14px"><button class="go" id="csv">&#x630;&#x62E;&#x6CC;&#x631;&#x647;</button><button class="bt" id="bex">&#x67E;&#x634;&#x62A;&#x6CC;&#x628;&#x627;&#x646;&#x200C;&#x6AF;&#x6CC;&#x631;&#x6CC;</button><button class="bt" id="bim">&#x628;&#x627;&#x632;&#x6AF;&#x631;&#x62F;&#x627;&#x646;&#x6CC;</button><button class="bt" id="ccl">&#x628;&#x633;&#x62A;&#x646;</button></div>
@@ -158,8 +158,8 @@ function calc(s){
 const inS=d=>cur===null||mk(d)===cur;
 const agg=key=>aggF(i=>key===null||i===key);
 function aggF(P){
-  const r={norm:0,ot:0,mis:0,md:new Set(),pay:0,exp:0},ok=d=>P(mk(d));
-  D.sh.forEach(s=>{if(!ok(s.date))return;const c=calc(s);r.norm+=c.norm;r.ot+=c.ot;r.mis+=c.mis;if(s.type==='m')r.md.add(s.date)});
+  const r={ot:0,mis:0,md:new Set(),pay:0,exp:0},ok=d=>P(mk(d));
+  D.sh.forEach(s=>{if(!ok(s.date))return;const c=calc(s);r.ot+=c.ot;r.mis+=c.mis;if(s.type==='m')r.md.add(s.date)});
   D.pay.forEach(p=>{if(ok(p.date))r.pay+=p.amount});D.exp.forEach(p=>{if(ok(p.date))r.exp+=p.amount});
   return r;
 }
@@ -198,7 +198,7 @@ function vSh(){
   const L=D.sh.filter(s=>inS(s.date)).sort((a,b)=>b.date.localeCompare(a.date)||a.start.localeCompare(b.start));
   const days={};L.forEach(s=>(days[s.date]=days[s.date]||[]).push(s));
   const a=agg(cur);
-  let h=`<form class="card f" id="f"><div class="lb">\u062a\u0627\u0631\u06cc\u062e${dp(v.date)}</div><label>\u0646\u0648\u0639<select name="type"><option value="w" ${v.type==='w'?'selected':''}>\u0627\u062f\u0627\u0631\u0647 / \u06a9\u0627\u0631 \u0639\u0627\u062f\u06cc</option><option value="m" ${v.type==='m'?'selected':''}>\u0645\u0627\u0645\u0648\u0631\u06cc\u062a</option></select></label>
+  let h=`<form class="card f" id="f"><div class="lb">\u062a\u0627\u0631\u06cc\u062e${dp(v.date)}</div><label>\u0646\u0648\u0639<select name="type"><option value="w" ${v.type==='w'?'selected':''}>\u0627\u062f\u0627\u0631\u0647 / \u06a9\u0627\u0631</option><option value="m" ${v.type==='m'?'selected':''}>\u0645\u0627\u0645\u0648\u0631\u06cc\u062a</option></select></label>
   <div class="g2"><label>\u0634\u0631\u0648\u0639<input type="time" name="start" required value="${v.start}"></label><label>\u067e\u0627\u06cc\u0627\u0646<input type="time" name="end" required value="${v.end}"></label></div>
   <label>\u0639\u0646\u0648\u0627\u0646 (\u0627\u062e\u062a\u06cc\u0627\u0631\u06cc)<input name="title" maxlength="60" placeholder="\u0645\u062b\u0644\u0627\u064b: \u0627\u062f\u0627\u0631\u0647\u060c \u0646\u0645\u0627\u06cc\u0634\u06af\u0627\u0647" value="${esc(v.title)}"></label>
   <div class="pvw" id="pvw"></div><div class="dr"><button class="go">${e?'\u0630\u062e\u06cc\u0631\u0647 \u062a\u063a\u06cc\u06cc\u0631':'\u062b\u0628\u062a'}</button>${cancelBtn()}</div></form>
@@ -262,13 +262,13 @@ function rows(key){
   const ms=new Set([...D.sh,...D.pay,...D.exp].map(x=>mk(x.date)));if(key!==null)ms.add(key);
   return[...ms].sort((a,b)=>b-a);
 }
-function statCards(a){return[['\u0633\u0627\u0639\u062a \u06a9\u0627\u0631 \u0639\u0627\u062f\u06cc',hm(a.norm)],['\u0627\u0636\u0627\u0641\u0647\u200c\u06a9\u0627\u0631',hm(a.ot),1],['\u0645\u0627\u0645\u0648\u0631\u06cc\u062a',hm(a.mis)+' ('+pn(a.md.size)+' \u0631\u0648\u0632)'],['\u062c\u0645\u0639 \u062f\u0631\u06cc\u0627\u0641\u062a\u06cc',money(a.pay)],['\u0647\u0632\u06cc\u0646\u0647 \u0627\u0632 \u062c\u06cc\u0628',money(a.exp)]]}
+function statCards(a){return[['\u0627\u0636\u0627\u0641\u0647\u200c\u06a9\u0627\u0631',hm(a.ot),1],['\u0645\u0627\u0645\u0648\u0631\u06cc\u062a',hm(a.mis)+' ('+pn(a.md.size)+' \u0631\u0648\u0632)'],['\u062c\u0645\u0639 \u062f\u0631\u06cc\u0627\u0641\u062a\u06cc',money(a.pay)],['\u0647\u0632\u06cc\u0646\u0647 \u0627\u0632 \u062c\u06cc\u0628',money(a.exp)]]}
 function monthTable(key,print){
-  const ms=key===null?rows(null):[key],T={norm:0,ot:0,mis:0,md:0,pay:0,exp:0};
-  const body=ms.map(m=>{const a=agg(m);T.norm+=a.norm;T.ot+=a.ot;T.mis+=a.mis;T.md+=a.md.size;T.pay+=a.pay;T.exp+=a.exp;
-    return `<tr><td>${lab(m)}</td><td>${hm(a.norm)}</td><td>${hm(a.ot)}</td><td>${hm(a.mis)} (${pn(a.md.size)})</td><td>${fa(a.pay)}</td><td>${fa(a.exp)}</td></tr>`}).join('');
-  return `<table><thead><tr><th>\u0645\u0627\u0647</th><th>\u0639\u0627\u062f\u06cc</th><th>\u0627\u0636\u0627\u0641\u0647\u200c\u06a9\u0627\u0631</th><th>\u0645\u0627\u0645\u0648\u0631\u06cc\u062a (\u0631\u0648\u0632)</th><th>\u062f\u0631\u06cc\u0627\u0641\u062a\u06cc</th><th>\u0647\u0632\u06cc\u0646\u0647</th></tr></thead><tbody>${body||'<tr><td colspan="6">\u062f\u0627\u062f\u0647\u200c\u0627\u06cc \u0646\u06cc\u0633\u062a</td></tr>'}</tbody>
-  ${ms.length>1?`<tfoot><tr><td>\u062c\u0645\u0639 \u06a9\u0644</td><td>${hm(T.norm)}</td><td>${hm(T.ot)}</td><td>${hm(T.mis)} (${pn(T.md)})</td><td>${fa(T.pay)}</td><td>${fa(T.exp)}</td></tr></tfoot>`:''}</table>`;
+  const ms=key===null?rows(null):[key],T={ot:0,mis:0,md:0,pay:0,exp:0};
+  const body=ms.map(m=>{const a=agg(m);T.ot+=a.ot;T.mis+=a.mis;T.md+=a.md.size;T.pay+=a.pay;T.exp+=a.exp;
+    return `<tr><td>${lab(m)}</td><td>${hm(a.ot)}</td><td>${hm(a.mis)} (${pn(a.md.size)})</td><td>${fa(a.pay)}</td><td>${fa(a.exp)}</td></tr>`}).join('');
+  return `<table><thead><tr><th>\u0645\u0627\u0647</th><th>\u0627\u0636\u0627\u0641\u0647\u200c\u06a9\u0627\u0631</th><th>\u0645\u0627\u0645\u0648\u0631\u06cc\u062a (\u0631\u0648\u0632)</th><th>\u062f\u0631\u06cc\u0627\u0641\u062a\u06cc</th><th>\u0647\u0632\u06cc\u0646\u0647</th></tr></thead><tbody>${body||'<tr><td colspan="5">\u062f\u0627\u062f\u0647\u200c\u0627\u06cc \u0646\u06cc\u0633\u062a</td></tr>'}</tbody>
+  ${ms.length>1?`<tfoot><tr><td>\u062c\u0645\u0639 \u06a9\u0644</td><td>${hm(T.ot)}</td><td>${hm(T.mis)} (${pn(T.md)})</td><td>${fa(T.pay)}</td><td>${fa(T.exp)}</td></tr></tfoot>`:''}</table>`;
 }
 function vRep(){
   const a=agg(cur);
@@ -282,7 +282,7 @@ function pdf(key,only){
   const sh=D.sh.filter(ok).sort(by),pay=D.pay.filter(ok).sort(by),ex=D.exp.filter(ok).sort(by);
   const tb=(h,r)=>`<table><thead><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${r||`<tr><td colspan="${h.length}">\u2014</td></tr>`}</tbody></table>`;
   const NM={sh:'\u0633\u0627\u0639\u062a \u06a9\u0627\u0631',pay:'\u062f\u0631\u06cc\u0627\u0641\u062a\u06cc',exp:'\u0647\u0632\u06cc\u0646\u0647 \u0627\u0632 \u062c\u06cc\u0628'};
-  const tot={sh:`\u0633\u0627\u0639\u062a \u0639\u0627\u062f\u06cc ${hm(a.norm)} \u00b7 \u0627\u0636\u0627\u0641\u0647\u200c\u06a9\u0627\u0631 ${hm(a.ot)} \u00b7 \u0645\u0627\u0645\u0648\u0631\u06cc\u062a ${hm(a.mis)} (${pn(a.md.size)} \u0631\u0648\u0632)`,pay:`\u062c\u0645\u0639 \u062f\u0631\u06cc\u0627\u0641\u062a\u06cc: ${money(a.pay)}`,exp:`\u062c\u0645\u0639 \u0647\u0632\u06cc\u0646\u0647 \u0627\u0632 \u062c\u06cc\u0628: ${money(a.exp)}`};
+  const tot={sh:`\u0627\u0636\u0627\u0641\u0647\u200c\u06a9\u0627\u0631 ${hm(a.ot)} \u00b7 \u0645\u0627\u0645\u0648\u0631\u06cc\u062a ${hm(a.mis)} (${pn(a.md.size)} \u0631\u0648\u0632)`,pay:`\u062c\u0645\u0639 \u062f\u0631\u06cc\u0627\u0641\u062a\u06cc: ${money(a.pay)}`,exp:`\u062c\u0645\u0639 \u0647\u0632\u06cc\u0646\u0647 \u0627\u0632 \u062c\u06cc\u0628: ${money(a.exp)}`};
   const S={
    sh:`<h2>\u062c\u0632\u0626\u06cc\u0627\u062a \u0633\u0627\u0639\u062a \u06a9\u0627\u0631</h2>${tb(['\u062a\u0627\u0631\u06cc\u062e','\u0646\u0648\u0639','\u0634\u0631\u0648\u0639','\u067e\u0627\u06cc\u0627\u0646','\u0639\u0646\u0648\u0627\u0646','\u0645\u062f\u062a','\u0627\u0636\u0627\u0641\u0647\u200c\u06a9\u0627\u0631'],sh.map(s=>{const c=calc(s);return `<tr><td>${fdf(s.date)}</td><td>${s.type==='m'?'\u0645\u0627\u0645\u0648\u0631\u06cc\u062a':'\u0627\u062f\u0627\u0631\u0647'}</td><td>${tf(s.start)}</td><td>${tf(s.end)}</td><td>${esc(s.title||'')}</td><td>${hm(c.tot)}</td><td>${c.ot?hm(c.ot):'\u2014'}</td></tr>`}).join(''))}`,
    pay:`<h2>\u062f\u0631\u06cc\u0627\u0641\u062a\u06cc\u200c\u0647\u0627</h2>${tb(['\u062a\u0627\u0631\u06cc\u062e','\u0645\u0628\u0644\u063a','\u062a\u0648\u0636\u06cc\u062d'],pay.map(p=>`<tr><td>${fdf(p.date)}</td><td>${fa(p.amount)}</td><td>${esc(p.note||'')}</td></tr>`).join(''))}`,
@@ -326,7 +326,7 @@ function vMon(){
     const acc=(k,t,sum,L,body)=>`<details class="acc" data-k="${k}" ${OPEN[k]?'open':''}><summary><span>${t}</span><b>${sum}</b></summary><div class="ab"><div class="dr" style="margin-bottom:10px"><button class="bt" data-p="${k}">\u2b07 \u062e\u0631\u0648\u062c\u06cc PDF</button></div>${L.length?body:empty('\u0645\u0648\u0631\u062f\u06cc \u062b\u0628\u062a \u0646\u0634\u062f\u0647','')}</div></details>`;
     h=`<button class="bt" id="bk">\u2192 \u0645\u0627\u0647\u200c\u0647\u0627\u06cc ${pn(MV.y)}</button><div class="h2" style="margin:12px 2px 10px">${lab(i)}</div>
     <div class="grid">${statCards(a).map(([k,v,hi])=>`<div class="stat ${hi?'hi':''}"><small>${k}</small><b>${v}</b></div>`).join('')}</div>
-    ${acc('exp','\ud83e\uddfe \u0647\u0632\u06cc\u0646\u0647 \u0627\u0632 \u062c\u06cc\u0628',money(a.exp),ex,expRows(ex))}${acc('pay','\ud83d\udcb0 \u062f\u0631\u06cc\u0627\u0641\u062a\u06cc',money(a.pay),pay,payRows(pay))}${acc('sh','\u23f1 \u0633\u0627\u0639\u062a \u06a9\u0627\u0631',hm(a.norm+a.ot+a.mis),sh,shRows(sh))}
+    ${acc('exp','\ud83e\uddfe \u0647\u0632\u06cc\u0646\u0647 \u0627\u0632 \u062c\u06cc\u0628',money(a.exp),ex,expRows(ex))}${acc('pay','\ud83d\udcb0 \u062f\u0631\u06cc\u0627\u0641\u062a\u06cc',money(a.pay),pay,payRows(pay))}${acc('sh','\u23f1 \u0633\u0627\u0639\u062a \u06a9\u0627\u0631','\u0627\u0636\u0627\u0641\u0647\u200c\u06a9\u0627\u0631 '+hm(a.ot),sh,shRows(sh))}
     <div class="dr"><button class="go" id="pall">\u2b07 PDF \u06a9\u0644 \u0627\u06cc\u0646 \u0645\u0627\u0647</button></div>`;
   }
   $('#v').innerHTML=h;
