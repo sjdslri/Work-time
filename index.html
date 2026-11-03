@@ -50,8 +50,8 @@ select option{color:#000}input[type=file]{padding:8px;font-size:14px}
 .tw{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:14px;white-space:nowrap}
 th,td{padding:9px 10px;text-align:center;border-bottom:1px solid var(--ln)}th{color:var(--mu);font-weight:600}td:first-child,th:first-child{text-align:right}
 tfoot td{font-weight:800;color:var(--ac);border:0}
-.nav{position:fixed;z-index:20;right:12px;left:12px;bottom:calc(10px + env(safe-area-inset-bottom));max-width:520px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2px;padding:6px;border-radius:26px;background:var(--sf2);box-shadow:0 14px 40px -10px #000}
-.nav button{display:flex;flex-direction:column;align-items:center;padding:5px 2px;font-size:12px;line-height:1.35;border-radius:20px;color:var(--mu);min-height:54px;justify-content:center}
+.nav{position:fixed;z-index:20;right:12px;left:12px;bottom:calc(10px + env(safe-area-inset-bottom));max-width:520px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:1px;padding:6px;border-radius:26px;background:var(--sf2);box-shadow:0 14px 40px -10px #000}
+.nav button{display:flex;flex-direction:column;align-items:center;padding:5px 1px;font-size:11px;line-height:1.35;border-radius:20px;color:var(--mu);min-height:54px;justify-content:center}
 .nav em{font-style:normal;font-size:20px;line-height:1.2}.nav button[aria-pressed=true]{background:var(--ac);color:var(--ai);font-weight:700}
 dialog{border-radius:24px;padding:20px;width:min(92vw,460px);color:var(--ink);background:color-mix(in srgb,var(--bg) 92%,#000);font-family:inherit;max-height:90dvh}
 dialog::backdrop{background:rgba(0,0,0,.65);backdrop-filter:blur(4px)}
@@ -62,6 +62,13 @@ dialog img{width:100%;max-height:60dvh;object-fit:contain;border-radius:14px;mar
 .cg{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}.cg small{color:var(--mu);font-size:12px}.cg small:nth-child(7){color:var(--dg)}
 .cg button{aspect-ratio:1;min-height:38px;border-radius:50%;font-size:15px}.cg button.t{border:2px solid var(--ac)}.cg button.f{color:var(--dg)}
 .cg button[aria-pressed=true]{background:var(--ac);color:var(--ai);font-weight:800}
+.lb{display:grid;gap:2px;font-size:13px;color:var(--mu)}[hidden]{display:none!important}
+.dpw{display:flex;gap:6px}.dpw .dpb{flex:1;min-width:0}.dpn{width:46px;min-height:44px;border-radius:14px;background:var(--sf2);border:1px solid var(--ln);font-size:22px;color:var(--ink);flex:none}
+button.row{width:100%;text-align:right;cursor:pointer;color:var(--ink)}.bigrow>span{font-size:22px;color:var(--mu)}
+details.acc{background:var(--sf);border:1px solid var(--ln);border-radius:var(--r);margin-bottom:12px;overflow:hidden;-webkit-backdrop-filter:var(--bl);backdrop-filter:var(--bl)}
+details.acc summary{padding:14px 16px;display:flex;gap:10px;align-items:center;cursor:pointer;font-weight:700;list-style:none}details.acc summary::-webkit-details-marker{display:none}
+details.acc summary b{margin-right:auto;color:var(--ac);font-size:15px}details.acc summary::after{content:"&#x25BE;";color:var(--mu);transition:transform .2s}details.acc[open] summary::after{transform:rotate(180deg)}
+.ab{padding:0 12px 12px}
 .h2{font-weight:800;font-size:18px;margin-bottom:8px}.sw{display:flex;align-items:center;gap:8px;font-size:14px;margin:8px 0}.sw input{width:22px;min-height:0;height:22px}
 @media(max-width:480px){.g2{gap:8px}.amt{font-size:15px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -77,7 +84,7 @@ dialog img{width:100%;max-height:60dvh;object-fit:contain;border-radius:14px;mar
  <main id="v"></main>
 </div>
 <nav class="nav" id="nav">
- <button data-t="sh"><em>&#x23F1;</em>&#x633;&#x627;&#x639;&#x62A; &#x6A9;&#x627;&#x631;</button><button data-t="pay"><em>&#x1F4B0;</em>&#x62F;&#x631;&#x6CC;&#x627;&#x641;&#x62A;&#x6CC;</button><button data-t="exp"><em>&#x1F9FE;</em>&#x647;&#x632;&#x6CC;&#x646;&#x647;&#x200C;&#x647;&#x627;</button><button data-t="rep"><em>&#x1F4CA;</em>&#x6AF;&#x632;&#x627;&#x631;&#x634;</button>
+ <button data-t="sh"><em>&#x23F1;</em>&#x633;&#x627;&#x639;&#x62A; &#x6A9;&#x627;&#x631;</button><button data-t="pay"><em>&#x1F4B0;</em>&#x62F;&#x631;&#x6CC;&#x627;&#x641;&#x62A;&#x6CC;</button><button data-t="exp"><em>&#x1F9FE;</em>&#x647;&#x632;&#x6CC;&#x646;&#x647;&#x200C;&#x647;&#x627;</button><button data-t="mon"><em>&#x1F5C2;</em>&#x645;&#x627;&#x647;&#x200C;&#x647;&#x627;</button><button data-t="rep"><em>&#x1F4CA;</em>&#x6AF;&#x632;&#x627;&#x631;&#x634;</button>
 </nav>
 
 <dialog id="dSet">
@@ -149,8 +156,9 @@ function calc(s){
   return{tot,norm,ot:tot-norm,mis:0};
 }
 const inS=d=>cur===null||mk(d)===cur;
-function agg(key){
-  const r={norm:0,ot:0,mis:0,md:new Set(),pay:0,exp:0},ok=d=>key===null||mk(d)===key;
+const agg=key=>aggF(i=>key===null||i===key);
+function aggF(P){
+  const r={norm:0,ot:0,mis:0,md:new Set(),pay:0,exp:0},ok=d=>P(mk(d));
   D.sh.forEach(s=>{if(!ok(s.date))return;const c=calc(s);r.norm+=c.norm;r.ot+=c.ot;r.mis+=c.mis;if(s.type==='m')r.md.add(s.date)});
   D.pay.forEach(p=>{if(ok(p.date))r.pay+=p.amount});D.exp.forEach(p=>{if(ok(p.date))r.exp+=p.amount});
   return r;
@@ -163,8 +171,10 @@ function render(){
   $('#ml').textContent=cur===null?'\u0647\u0645\u0647 \u0645\u0627\u0647\u200c\u0647\u0627':lab(cur);
   $('#all').setAttribute('aria-pressed',cur===null);$('#nx').disabled=$('#pv').disabled=cur===null;
   document.querySelectorAll('#nav button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.t===tab));
-  ({sh:vSh,pay:vPay,exp:vExp,rep:vRep})[tab]();
+  ({sh:vSh,pay:vPay,exp:vExp,mon:vMon,rep:vRep})[tab]();
   document.querySelectorAll('[data-dp]').forEach(b=>b.onclick=()=>openCal(b));
+  document.querySelectorAll('.dpn').forEach(b=>b.onclick=()=>{const w=b.parentElement,h=w.querySelector('input[type=hidden]'),p=w.querySelector('[data-dp]');h.value=shift(h.value||TODAY,+b.dataset.n);p.textContent=fdl(h.value);h.form.dispatchEvent(new Event('input',{bubbles:true}))});
+  $('.mon').hidden=tab==='mon';
 }
 document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>{tab=b.dataset.t;E=null;render();scrollTo(0,0)});
 $('#nx').onclick=()=>{cur--;render()};$('#pv').onclick=()=>{cur++;render()};
@@ -188,8 +198,7 @@ function vSh(){
   const L=D.sh.filter(s=>inS(s.date)).sort((a,b)=>b.date.localeCompare(a.date)||a.start.localeCompare(b.start));
   const days={};L.forEach(s=>(days[s.date]=days[s.date]||[]).push(s));
   const a=agg(cur);
-  let h=`<form class="card f" id="f"><div class="g2"><label>\u062a\u0627\u0631\u06cc\u062e${dp(v.date)}</label>
-  <label>\u0646\u0648\u0639<select name="type"><option value="w" ${v.type==='w'?'selected':''}>\u0627\u062f\u0627\u0631\u0647 / \u06a9\u0627\u0631 \u0639\u0627\u062f\u06cc</option><option value="m" ${v.type==='m'?'selected':''}>\u0645\u0627\u0645\u0648\u0631\u06cc\u062a</option></select></label></div>
+  let h=`<form class="card f" id="f"><div class="lb">\u062a\u0627\u0631\u06cc\u062e${dp(v.date)}</div><label>\u0646\u0648\u0639<select name="type"><option value="w" ${v.type==='w'?'selected':''}>\u0627\u062f\u0627\u0631\u0647 / \u06a9\u0627\u0631 \u0639\u0627\u062f\u06cc</option><option value="m" ${v.type==='m'?'selected':''}>\u0645\u0627\u0645\u0648\u0631\u06cc\u062a</option></select></label>
   <div class="g2"><label>\u0634\u0631\u0648\u0639<input type="time" name="start" required value="${v.start}"></label><label>\u067e\u0627\u06cc\u0627\u0646<input type="time" name="end" required value="${v.end}"></label></div>
   <label>\u0639\u0646\u0648\u0627\u0646 (\u0627\u062e\u062a\u06cc\u0627\u0631\u06cc)<input name="title" maxlength="60" placeholder="\u0645\u062b\u0644\u0627\u064b: \u0627\u062f\u0627\u0631\u0647\u060c \u0646\u0645\u0627\u06cc\u0634\u06af\u0627\u0647" value="${esc(v.title)}"></label>
   <div class="pvw" id="pvw"></div><div class="dr"><button class="go">${e?'\u0630\u062e\u06cc\u0631\u0647 \u062a\u063a\u06cc\u06cc\u0631':'\u062b\u0628\u062a'}</button>${cancelBtn()}</div></form>
@@ -213,8 +222,7 @@ function vSh(){
 function vPay(){
   const e=getE('pay'),v=e||{date:TODAY,amount:'',note:''};
   const L=D.pay.filter(p=>inS(p.date)).sort((a,b)=>b.date.localeCompare(a.date)),tot=L.reduce((x,p)=>x+p.amount,0);
-  $('#v').innerHTML=`<form class="card f" id="f"><div class="g2"><label>\u062a\u0627\u0631\u06cc\u062e \u0648\u0627\u0631\u06cc\u0632${dp(v.date)}</label>
-  <label>\u0645\u0628\u0644\u063a (${esc(D.cfg.cur)})<input name="amount" inputmode="numeric" dir="ltr" required placeholder="0" value="${v.amount?v.amount.toLocaleString('en-US'):''}"></label></div>
+  $('#v').innerHTML=`<form class="card f" id="f"><div class="lb">\u062a\u0627\u0631\u06cc\u062e \u0648\u0627\u0631\u06cc\u0632${dp(v.date)}</div><label>\u0645\u0628\u0644\u063a (${esc(D.cfg.cur)})<input name="amount" inputmode="numeric" dir="ltr" required placeholder="0" value="${v.amount?v.amount.toLocaleString('en-US'):''}"></label>
   <label>\u062a\u0648\u0636\u06cc\u062d (\u0627\u062e\u062a\u06cc\u0627\u0631\u06cc)<input name="note" maxlength="80" placeholder="\u0645\u062b\u0644\u0627\u064b: \u062d\u0642\u0648\u0642\u060c \u067e\u0627\u062f\u0627\u0634" value="${esc(v.note)}"></label>
   <div class="dr"><button class="go">${e?'\u0630\u062e\u06cc\u0631\u0647 \u062a\u063a\u06cc\u06cc\u0631':'\u062b\u0628\u062a \u0648\u0627\u0631\u06cc\u0632\u06cc'}</button>${cancelBtn()}</div></form>
   <div class="sum">\u062c\u0645\u0639 \u062f\u0631\u06cc\u0627\u0641\u062a\u06cc ${cur===null?'\u06a9\u0644':'\u0627\u06cc\u0646 \u0645\u0627\u0647'}<span>${money(tot)}</span></div>`+
@@ -230,8 +238,7 @@ function moneyInput(i){i.oninput=()=>{const n=num(i.value);i.value=n?n.toLocaleS
 function vExp(){
   const e=getE('exp'),v=e||{date:TODAY,amount:'',title:''};
   const L=D.exp.filter(p=>inS(p.date)).sort((a,b)=>b.date.localeCompare(a.date)),tot=L.reduce((x,p)=>x+p.amount,0);
-  $('#v').innerHTML=`<form class="card f" id="f"><div class="g2"><label>\u062a\u0627\u0631\u06cc\u062e \u062e\u0631\u06cc\u062f${dp(v.date)}</label>
-  <label>\u0645\u0628\u0644\u063a (${esc(D.cfg.cur)})<input name="amount" inputmode="numeric" dir="ltr" required placeholder="0" value="${v.amount?v.amount.toLocaleString('en-US'):''}"></label></div>
+  $('#v').innerHTML=`<form class="card f" id="f"><div class="lb">\u062a\u0627\u0631\u06cc\u062e \u062e\u0631\u06cc\u062f${dp(v.date)}</div><label>\u0645\u0628\u0644\u063a (${esc(D.cfg.cur)})<input name="amount" inputmode="numeric" dir="ltr" required placeholder="0" value="${v.amount?v.amount.toLocaleString('en-US'):''}"></label>
   <label>\u0686\u06cc \u062e\u0631\u06cc\u062f\u06cc\u061f<input name="title" maxlength="80" required placeholder="\u0645\u062b\u0644\u0627\u064b: \u0628\u0646\u0632\u06cc\u0646\u060c \u063a\u0630\u0627\u060c \u0627\u0628\u0632\u0627\u0631" value="${esc(v.title)}"></label>
   <label>\u0639\u06a9\u0633 \u0641\u06cc\u0634 ${e&&e.img?'(\u0628\u0631\u0627\u06cc \u062a\u063a\u06cc\u06cc\u0631\u060c \u0639\u06a9\u0633 \u062c\u062f\u06cc\u062f \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0646)':'(\u0627\u062e\u062a\u06cc\u0627\u0631\u06cc)'}<input type="file" name="img" accept="image/*"></label>
   <div class="dr"><button class="go">${e?'\u0630\u062e\u06cc\u0631\u0647 \u062a\u063a\u06cc\u06cc\u0631':'\u062b\u0628\u062a \u0647\u0632\u06cc\u0646\u0647'}</button>${cancelBtn()}</div></form>
@@ -243,8 +250,9 @@ function vExp(){
     if(file){try{await idb('set',id,await shrink(file));o.img=1;o.iv=Date.now();KIV[id]=o.iv;saveKIV()}catch(x){alert('\u0630\u062e\u06cc\u0631\u0647 \u0639\u06a9\u0633 \u0627\u0646\u062c\u0627\u0645 \u0646\u0634\u062f.')}}
     o.u=Date.now();if(e)Object.assign(e,o);else D.exp.push({id,...o});E=null;if(cur!==null)cur=mk(o.date);sv()};
   bindRows();bindCancel();
-  document.querySelectorAll('[data-img]').forEach(async el=>{try{const b=await idb('get',+el.dataset.img);if(b){const u=URL.createObjectURL(b);el.style.backgroundImage=`url(${u})`;el.style.cursor='pointer';el.onclick=()=>showImg(+el.dataset.img,b)}}catch(x){}});
+  thumbs();
 }
+function thumbs(){document.querySelectorAll('[data-img]').forEach(async el=>{try{const b=await idb('get',+el.dataset.img);if(b){const u=URL.createObjectURL(b);el.style.backgroundImage=`url(${u})`;el.style.cursor='pointer';el.onclick=()=>showImg(+el.dataset.img,b)}}catch(x){}});}
 function showImg(id,b){const u=URL.createObjectURL(b),p=D.exp.find(x=>x.id===id);$('#big').src=u;const a=$('#dl');a.href=u;a.download=`receipt-${p.date}-${p.title.replace(/[^\w\u0600-\u06FF]+/g,'_')}.jpg`;$('#dImg').showModal()}
 $('#icl').onclick=()=>$('#dImg').close();
 
@@ -269,20 +277,23 @@ function vRep(){
   <div class="dr"><button class="go" id="pdf">\u2b07 \u062e\u0631\u0648\u062c\u06cc PDF (${cur===null?'\u0647\u0645\u0647 \u0645\u0627\u0647\u200c\u0647\u0627':lab(cur)})</button></div>`;
   $('#pdf').onclick=()=>pdf(cur);
 }
-function pdf(key){
-  const a=agg(key),sc=key===null?'\u0647\u0645\u0647 \u0645\u0627\u0647\u200c\u0647\u0627':lab(key),by=(x,y)=>x.date.localeCompare(y.date)||(x.start||'').localeCompare(y.start||'');
-  const sh=D.sh.filter(s=>key===null||mk(s.date)===key).sort(by),pay=D.pay.filter(s=>key===null||mk(s.date)===key).sort(by),ex=D.exp.filter(s=>key===null||mk(s.date)===key).sort(by);
+function pdf(key,only){
+  const a=agg(key),sc=key===null?'\u0647\u0645\u0647 \u0645\u0627\u0647\u200c\u0647\u0627':lab(key),by=(x,y)=>x.date.localeCompare(y.date)||(x.start||'').localeCompare(y.start||''),ok=x=>key===null||mk(x.date)===key;
+  const sh=D.sh.filter(ok).sort(by),pay=D.pay.filter(ok).sort(by),ex=D.exp.filter(ok).sort(by);
   const tb=(h,r)=>`<table><thead><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${r||`<tr><td colspan="${h.length}">\u2014</td></tr>`}</tbody></table>`;
-  const html=`<!DOCTYPE html><html lang="fa" dir="rtl"><head><meta charset="UTF-8"><title>\u06af\u0632\u0627\u0631\u0634 \u06a9\u0627\u0631\u0646\u0627\u0645\u0647 - ${sc}</title><link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+  const NM={sh:'\u0633\u0627\u0639\u062a \u06a9\u0627\u0631',pay:'\u062f\u0631\u06cc\u0627\u0641\u062a\u06cc',exp:'\u0647\u0632\u06cc\u0646\u0647 \u0627\u0632 \u062c\u06cc\u0628'};
+  const tot={sh:`\u0633\u0627\u0639\u062a \u0639\u0627\u062f\u06cc ${hm(a.norm)} \u00b7 \u0627\u0636\u0627\u0641\u0647\u200c\u06a9\u0627\u0631 ${hm(a.ot)} \u00b7 \u0645\u0627\u0645\u0648\u0631\u06cc\u062a ${hm(a.mis)} (${pn(a.md.size)} \u0631\u0648\u0632)`,pay:`\u062c\u0645\u0639 \u062f\u0631\u06cc\u0627\u0641\u062a\u06cc: ${money(a.pay)}`,exp:`\u062c\u0645\u0639 \u0647\u0632\u06cc\u0646\u0647 \u0627\u0632 \u062c\u06cc\u0628: ${money(a.exp)}`};
+  const S={
+   sh:`<h2>\u062c\u0632\u0626\u06cc\u0627\u062a \u0633\u0627\u0639\u062a \u06a9\u0627\u0631</h2>${tb(['\u062a\u0627\u0631\u06cc\u062e','\u0646\u0648\u0639','\u0634\u0631\u0648\u0639','\u067e\u0627\u06cc\u0627\u0646','\u0639\u0646\u0648\u0627\u0646','\u0645\u062f\u062a','\u0627\u0636\u0627\u0641\u0647\u200c\u06a9\u0627\u0631'],sh.map(s=>{const c=calc(s);return `<tr><td>${fdf(s.date)}</td><td>${s.type==='m'?'\u0645\u0627\u0645\u0648\u0631\u06cc\u062a':'\u0627\u062f\u0627\u0631\u0647'}</td><td>${tf(s.start)}</td><td>${tf(s.end)}</td><td>${esc(s.title||'')}</td><td>${hm(c.tot)}</td><td>${c.ot?hm(c.ot):'\u2014'}</td></tr>`}).join(''))}`,
+   pay:`<h2>\u062f\u0631\u06cc\u0627\u0641\u062a\u06cc\u200c\u0647\u0627</h2>${tb(['\u062a\u0627\u0631\u06cc\u062e','\u0645\u0628\u0644\u063a','\u062a\u0648\u0636\u06cc\u062d'],pay.map(p=>`<tr><td>${fdf(p.date)}</td><td>${fa(p.amount)}</td><td>${esc(p.note||'')}</td></tr>`).join(''))}`,
+   exp:`<h2>\u0647\u0632\u06cc\u0646\u0647\u200c\u0647\u0627\u06cc \u0627\u0632 \u062c\u06cc\u0628</h2>${tb(['\u062a\u0627\u0631\u06cc\u062e','\u0645\u0628\u0644\u063a','\u0634\u0631\u062d','\u0641\u06cc\u0634'],ex.map(p=>`<tr><td>${fdf(p.date)}</td><td>${fa(p.amount)}</td><td>${esc(p.title)}</td><td>${p.img?'\u062f\u0627\u0631\u062f':'\u2014'}</td></tr>`).join(''))}`};
+  const body=only?S[only]+`<p style="margin-top:8px"><b>${tot[only]}</b></p>`:`<div class="s">${statCards(a).map(([k,v])=>`<div><small>${k}</small><b>${v}</b></div>`).join('')}</div><h2>\u062e\u0644\u0627\u0635\u0647 \u0645\u0627\u0647 \u0628\u0647 \u0645\u0627\u0647</h2>${monthTable(key)}${S.sh}${S.pay}${S.exp}`;
+  const ttl=only?'\u06af\u0632\u0627\u0631\u0634 '+NM[only]:'\u06af\u0632\u0627\u0631\u0634 \u06a9\u0627\u0631\u0646\u0627\u0645\u0647';
+  const html=`<!DOCTYPE html><html lang="fa" dir="rtl"><head><meta charset="UTF-8"><title>${ttl} - ${sc}</title><link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
   <style>body{font-family:Vazirmatn,Tahoma,sans-serif;color:#111;padding:8px;font-size:12px;line-height:1.7}h1{font-size:20px;margin:0}h2{font-size:15px;margin:18px 0 6px;border-right:4px solid #F26A00;padding-right:8px}
   .s{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.s div{border:1px solid #ccc;border-radius:8px;padding:6px 12px;min-width:120px}.s small{color:#666;display:block}.s b{font-size:14px}
   table{width:100%;border-collapse:collapse;margin-top:4px}th,td{border:1px solid #ccc;padding:4px 7px;text-align:center}th{background:#f3f3f3}tr{page-break-inside:avoid}</style></head><body>
-  <h1>\u06af\u0632\u0627\u0631\u0634 \u06a9\u0627\u0631\u0646\u0627\u0645\u0647</h1><div>${sc} \u00b7 \u062a\u0627\u0631\u06cc\u062e \u062a\u0647\u06cc\u0647 ${fdf(TODAY)}</div>
-  <div class="s">${statCards(a).map(([k,v])=>`<div><small>${k}</small><b>${v}</b></div>`).join('')}</div>
-  <h2>\u062e\u0644\u0627\u0635\u0647 \u0645\u0627\u0647 \u0628\u0647 \u0645\u0627\u0647</h2>${monthTable(key)}
-  <h2>\u062c\u0632\u0626\u06cc\u0627\u062a \u0633\u0627\u0639\u062a \u06a9\u0627\u0631</h2>${tb(['\u062a\u0627\u0631\u06cc\u062e','\u0646\u0648\u0639','\u0634\u0631\u0648\u0639','\u067e\u0627\u06cc\u0627\u0646','\u0639\u0646\u0648\u0627\u0646','\u0645\u062f\u062a','\u0627\u0636\u0627\u0641\u0647\u200c\u06a9\u0627\u0631'],sh.map(s=>{const c=calc(s);return `<tr><td>${fdf(s.date)}</td><td>${s.type==='m'?'\u0645\u0627\u0645\u0648\u0631\u06cc\u062a':'\u0627\u062f\u0627\u0631\u0647'}</td><td>${tf(s.start)}</td><td>${tf(s.end)}</td><td>${esc(s.title||'')}</td><td>${hm(c.tot)}</td><td>${c.ot?hm(c.ot):'\u2014'}</td></tr>`}).join(''))}
-  <h2>\u062f\u0631\u06cc\u0627\u0641\u062a\u06cc\u200c\u0647\u0627</h2>${tb(['\u062a\u0627\u0631\u06cc\u062e','\u0645\u0628\u0644\u063a','\u062a\u0648\u0636\u06cc\u062d'],pay.map(p=>`<tr><td>${fdf(p.date)}</td><td>${fa(p.amount)}</td><td>${esc(p.note||'')}</td></tr>`).join(''))}
-  <h2>\u0647\u0632\u06cc\u0646\u0647\u200c\u0647\u0627\u06cc \u0627\u0632 \u062c\u06cc\u0628</h2>${tb(['\u062a\u0627\u0631\u06cc\u062e','\u0645\u0628\u0644\u063a','\u0634\u0631\u062d','\u0641\u06cc\u0634'],ex.map(p=>`<tr><td>${fdf(p.date)}</td><td>${fa(p.amount)}</td><td>${esc(p.title)}</td><td>${p.img?'\u062f\u0627\u0631\u062f':'\u2014'}</td></tr>`).join(''))}
+  <h1>${ttl}</h1><div>${sc} \u00b7 \u062a\u0627\u0631\u06cc\u062e \u062a\u0647\u06cc\u0647 ${fdf(TODAY)}</div>${body}
   <p style="margin-top:14px;color:#666">\u0645\u0628\u0627\u0644\u063a \u0628\u0647 ${esc(D.cfg.cur)} \u0627\u0633\u062a.</p></body></html>`;
   document.querySelectorAll('iframe.pf').forEach(x=>x.remove());
   const f=document.createElement('iframe');f.className='pf';f.style.cssText='position:fixed;width:0;height:0;border:0;visibility:hidden';document.body.appendChild(f);
@@ -290,10 +301,51 @@ function pdf(key){
   setTimeout(()=>{f.contentWindow.focus();f.contentWindow.print()},700);
 }
 
+// months tab: year -> month -> (expenses | payments | hours)
+let MV={y:null,m:null},OPEN={};
+const jBtn=(k,x)=>`<button class="ib" data-j="${k}:${x.id}" aria-label="\u0648\u06cc\u0631\u0627\u06cc\u0634">\u270e</button>`;
+const byd=(x,y)=>x.date.localeCompare(y.date);
+const shRows=L=>{const days={};L.forEach(s=>(days[s.date]=days[s.date]||[]).push(s));
+  return Object.keys(days).sort().map(d=>`<div class="dh"><b>${fd(d)}</b><span>\u062c\u0645\u0639 \u0631\u0648\u0632 ${hm(days[d].reduce((x,s)=>x+calc(s).tot,0))}</span></div>`+days[d].map(s=>{const c=calc(s);
+  return `<div class="row ${s.type==='m'?'m':''}"><div class="bd"><div class="t">${tf(s.start)} \u062a\u0627 ${tf(s.end)} ${s.title?'\u00b7 '+esc(s.title):''} <span class="chip ${s.type==='m'?'m':''}">${s.type==='m'?'\u0645\u0627\u0645\u0648\u0631\u06cc\u062a':'\u0627\u062f\u0627\u0631\u0647'}</span></div><div class="mt"><span>\u0645\u062f\u062a ${hm(c.tot)}</span>${c.ot?`<span class="chip ot">\u0627\u0636\u0627\u0641\u0647\u200c\u06a9\u0627\u0631 ${hm(c.ot)}</span>`:''}</div></div>${jBtn('sh',s)}</div>`}).join('')).join('')};
+const payRows=L=>L.map(p=>`<div class="row"><div class="bd"><div class="t">${esc(p.note||'\u0648\u0627\u0631\u06cc\u0632\u06cc')}</div><div class="mt"><span>${fd(p.date)}</span></div></div><div class="amt">${money(p.amount)}</div>${jBtn('pay',p)}</div>`).join('');
+const expRows=L=>L.map(p=>`<div class="row"><div class="th" ${p.img?`data-img="${p.id}"`:''}>${p.img?'':'\ud83e\uddfe'}</div><div class="bd"><div class="t">${esc(p.title)}</div><div class="mt"><span>${fd(p.date)}</span></div></div><div class="amt">${money(p.amount)}</div>${jBtn('exp',p)}</div>`).join('');
+function sumLine(a){return `<div class="mt"><span>\u0627\u0636\u0627\u0641\u0647\u200c\u06a9\u0627\u0631 ${hm(a.ot)}</span><span>\u062f\u0631\u06cc\u0627\u0641\u062a\u06cc ${money(a.pay)}</span><span>\u0647\u0632\u06cc\u0646\u0647 ${money(a.exp)}</span></div>`}
+function vMon(){
+  const idx=[...D.sh,...D.pay,...D.exp].map(x=>mk(x.date)),cy=J(TODAY).y;let h='';
+  if(MV.y===null){
+    const ys=[...new Set([...idx.map(i=>Math.floor(i/12)),cy])].sort((a,b)=>b-a);
+    h='<div class="h2" style="margin:0 2px 10px">\u0633\u0627\u0644 \u0631\u0627 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0646</div>'+ys.map(y=>`<button class="row bigrow" data-y="${y}"><div class="bd"><div class="t">${pn(y)}</div>${sumLine(aggF(i=>Math.floor(i/12)===y))}</div><span>\u2039</span></button>`).join('');
+  }else if(MV.m===null){
+    const ms=[...new Set([...idx.filter(i=>Math.floor(i/12)===MV.y),...(MV.y===cy?[mk(TODAY)]:[])])].sort((a,b)=>b-a);
+    h=`<button class="bt" id="bk">\u2192 \u0633\u0627\u0644\u200c\u0647\u0627</button><div class="h2" style="margin:12px 2px 10px">\u0645\u0627\u0647\u200c\u0647\u0627\u06cc ${pn(MV.y)}</div>`+
+      (ms.length?ms.map(i=>`<button class="row bigrow" data-m="${i}"><div class="bd"><div class="t">${MN[i%12]}</div>${sumLine(agg(i))}</div><span>\u2039</span></button>`).join(''):empty('\u062f\u0631 \u0627\u06cc\u0646 \u0633\u0627\u0644 \u0686\u06cc\u0632\u06cc \u062b\u0628\u062a \u0646\u0634\u062f\u0647',''));
+  }else{
+    const i=MV.m,a=agg(i),inM=x=>mk(x.date)===i;
+    const sh=D.sh.filter(inM).sort((x,y)=>x.date.localeCompare(y.date)||x.start.localeCompare(y.start)),pay=D.pay.filter(inM).sort(byd),ex=D.exp.filter(inM).sort(byd);
+    const acc=(k,t,sum,L,body)=>`<details class="acc" data-k="${k}" ${OPEN[k]?'open':''}><summary><span>${t}</span><b>${sum}</b></summary><div class="ab"><div class="dr" style="margin-bottom:10px"><button class="bt" data-p="${k}">\u2b07 \u062e\u0631\u0648\u062c\u06cc PDF</button></div>${L.length?body:empty('\u0645\u0648\u0631\u062f\u06cc \u062b\u0628\u062a \u0646\u0634\u062f\u0647','')}</div></details>`;
+    h=`<button class="bt" id="bk">\u2192 \u0645\u0627\u0647\u200c\u0647\u0627\u06cc ${pn(MV.y)}</button><div class="h2" style="margin:12px 2px 10px">${lab(i)}</div>
+    <div class="grid">${statCards(a).map(([k,v,hi])=>`<div class="stat ${hi?'hi':''}"><small>${k}</small><b>${v}</b></div>`).join('')}</div>
+    ${acc('exp','\ud83e\uddfe \u0647\u0632\u06cc\u0646\u0647 \u0627\u0632 \u062c\u06cc\u0628',money(a.exp),ex,expRows(ex))}${acc('pay','\ud83d\udcb0 \u062f\u0631\u06cc\u0627\u0641\u062a\u06cc',money(a.pay),pay,payRows(pay))}${acc('sh','\u23f1 \u0633\u0627\u0639\u062a \u06a9\u0627\u0631',hm(a.norm+a.ot+a.mis),sh,shRows(sh))}
+    <div class="dr"><button class="go" id="pall">\u2b07 PDF \u06a9\u0644 \u0627\u06cc\u0646 \u0645\u0627\u0647</button></div>`;
+  }
+  $('#v').innerHTML=h;
+  document.querySelectorAll('[data-y]').forEach(b=>b.onclick=()=>{MV.y=+b.dataset.y;MV.m=null;render();scrollTo(0,0)});
+  document.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{MV.m=+b.dataset.m;render();scrollTo(0,0)});
+  const bk=$('#bk');if(bk)bk.onclick=()=>{if(MV.m!==null)MV.m=null;else MV.y=null;render();scrollTo(0,0)};
+  document.querySelectorAll('details.acc').forEach(d=>d.ontoggle=()=>{OPEN[d.dataset.k]=d.open});
+  document.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>pdf(MV.m,b.dataset.p));
+  const pa=$('#pall');if(pa)pa.onclick=()=>pdf(MV.m);
+  document.querySelectorAll('[data-j]').forEach(b=>b.onclick=()=>{const[k,id]=b.dataset.j.split(':'),it=D[k].find(x=>x.id===+id);if(!it)return;tab=k;E={k,id:+id};cur=mk(it.date);render();scrollTo(0,0)});
+  thumbs();
+}
+// mark the entry form as "being edited" so background sync never wipes it
+document.addEventListener('input',e=>{const f=e.target.closest&&e.target.closest('#f');if(f)f.dataset.dirty='1'});
+document.addEventListener('change',e=>{const f=e.target.closest&&e.target.closest('#f');if(f)f.dataset.dirty='1'});
 
 // ---- Persian date picker ----
 const fdl=d=>fd(d)+' '+pn(J(d).y);
-const dp=d=>`<input type="hidden" name="date" value="${d}"><button type="button" class="dpb" data-dp>${fdl(d)}</button>`;
+const dp=d=>`<div class="dpw"><button type="button" class="dpn" data-n="-1" aria-label="\u0631\u0648\u0632 \u0642\u0628\u0644">\u203a</button><input type="hidden" name="date" value="${d}"><button type="button" class="dpb" data-dp>${fdl(d)}</button><button type="button" class="dpn" data-n="1" aria-label="\u0631\u0648\u0632 \u0628\u0639\u062f">\u2039</button></div>`;
 const shift=(d,n)=>{const x=new Date(d+'T12:00');x.setDate(x.getDate()+n);return iso(x)};
 function jFirst(y,m){const b=iso(new Date(y+621,2,21,12));const d0=shift(b,Math.round((m-1)*30.5));
   for(let k=-45;k<=45;k++){const g=shift(d0,k),j=J(g);if(j.y===y&&j.m===m&&j.d===1)return g}return d0}
@@ -343,6 +395,7 @@ async function sync(){
   if(!SY)return;if(syncing){again=true;return}
   syncing=true;setSt('\u062f\u0631 \u062d\u0627\u0644 \u0647\u0645\u06af\u0627\u0645\u200c\u0633\u0627\u0632\u06cc\u2026');
   try{
+    const before=canon({sh:D.sh,pay:D.pay,exp:D.exp,cfg:D.cfg,dead:D.dead});let dl=false;
     if(!SY.gid){const list=await gh('/gists?per_page=100');const f=list.find(g=>g.files&&g.files[FN]);if(f)SY.gid=f.id}
     let remote=null,files={};
     if(SY.gid){const g=await gh('/gists/'+SY.gid);files=g.files||{};if(files[FN])remote=JSON.parse(await fileText(files[FN]))}
@@ -350,7 +403,7 @@ async function sync(){
     const want={};D.exp.forEach(x=>{if(x.img)want[`img-${x.id}-${x.iv||0}.b64`]=x});
     for(const n in want){const x=want[n];if(KIV[x.id]===undefined){const lb=await idb('get',x.id).catch(()=>null);if(lb)KIV[x.id]=x.iv||0}}
     for(const n in want){const x=want[n];if(KIV[x.id]===(x.iv||0)||!files[n])continue;
-      await idb('set',x.id,unb64((await fileText(files[n])).trim()));KIV[x.id]=x.iv||0}
+      await idb('set',x.id,unb64((await fileText(files[n])).trim()));KIV[x.id]=x.iv||0;dl=true}
     const patch={};
     for(const n in want){const x=want[n];if(files[n]||KIV[x.id]!==(x.iv||0))continue;const b=await idb('get',x.id).catch(()=>null);if(b)patch[n]={content:await b64(b)}}
     for(const n in files){if(n.startsWith('img-')&&!want[n]){const id=+n.split('-')[1];if(D.dead[id]||D.exp.some(x=>x.id===id))patch[n]=null}}
@@ -361,7 +414,8 @@ async function sync(){
       if(SY.gid)await gh('/gists/'+SY.gid,{method:'PATCH',body:JSON.stringify({files:patch})});
       else{const g=await gh('/gists',{method:'POST',body:JSON.stringify({description:'karname',public:false,files:patch})});SY.gid=g.id}
     }
-    ST.s('kn_sync',SY);ST.s('kn_data',D);render();
+    ST.s('kn_sync',SY);ST.s('kn_data',D);
+    if(dl||before!==canon(mine)){const f=$('#f');if(!(f&&f.dataset.dirty==='1'))render()}
     setSt('\u2713 \u0647\u0645\u06af\u0627\u0645 \u0634\u062f\u060c \u0633\u0627\u0639\u062a '+new Date().toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'}));
   }catch(e){setSt(String(e.message)==='401'?'\u062a\u0648\u06a9\u0646 \u0645\u0639\u062a\u0628\u0631 \u0646\u06cc\u0633\u062a\u061b \u062f\u0648\u0628\u0627\u0631\u0647 \u0645\u062a\u0635\u0644 \u06a9\u0646':'\u0627\u062a\u0635\u0627\u0644 \u0628\u0631\u0642\u0631\u0627\u0631 \u0646\u0634\u062f\u061b \u0628\u0639\u062f\u0627\u064b \u062f\u0648\u0628\u0627\u0631\u0647 \u062a\u0644\u0627\u0634 \u0645\u06cc\u200c\u0634\u0648\u062f')}
   syncing=false;if(again){again=false;sched()}
